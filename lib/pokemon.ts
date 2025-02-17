@@ -1,4 +1,5 @@
 import {PokemonListResponse} from "@/lib/types";
+import {notFound} from "next/navigation";
 
 export async function getPokemonTypes() {
   const response = await fetch('https://pokeapi.co/api/v2/type');
@@ -50,5 +51,6 @@ export async function getPokemonsByType(type: string, page: number = 1, limit: n
 export async function getPokemonDetails(id: string) {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const data = await response.json();
+  if (!data) notFound();
   return data;
 }

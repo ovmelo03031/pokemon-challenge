@@ -32,6 +32,7 @@ export function PokemonProvider({ children }: { children: ReactNode }) {
 
   const { data: pokemonData, isLoading } = useQuery({
     queryKey: ['pokemons', page, selectedType],
+
     queryFn: () => 
       selectedType !== "all"
         ? getPokemonsByType(selectedType, page, limit)
