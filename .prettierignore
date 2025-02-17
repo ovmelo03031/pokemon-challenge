@@ -1,0 +1,45 @@
+# Dependencies
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Production
+build
+
+# Debugging
+npm-debug.log
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env*
+
+# Vercel
+.vercel
+
+# Typescript
+.tsbuildinfo
+
+# IDE Configurations
+.idea/*
+.vscode/*
+
+# Various files
+.husky/*
+*.svg
+*.ico
+*.md
+.public/*
+public/*
+package.json
+package-lock.json
+.eslintrc.json
+.prettierrc*
+.eslintignore
+.gitpod.yml
+bitbucket-pipelines.yml
+tsconfig.json
+dist
+vite.config.ts
