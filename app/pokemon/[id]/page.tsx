@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import { getPokemonDetails, getPokemonList } from '@/lib/pokemon';
-import { PokemonDetailsClient } from '@/core/components/PokemonDetailsClient';
-import { Loader2 } from 'lucide-react';
+import {Suspense} from 'react';
+import {getPokemonDetails, getPokemonList} from '@/lib/pokemon';
+import {PokemonDetailsClient} from '@/core/components/PokemonDetailsClient';
+import Loading from "@/app/loading";
 
 export async function generateStaticParams() {
   const { pokemons } = await getPokemonList(1, 1000);
@@ -11,29 +11,19 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function PokemonDetail({ params }: Props) {
   'use server';
 
-  if (!params.id) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Loader2 className="w-8 h-8 animate-spin" />
-      </div>
-    );
-  }
+  const { id } = await params;
 
-  const pokemon = await getPokemonDetails(params.id);
+  const pokemon = await getPokemonDetails(id);
 
   return (
     <Suspense
-      fallback={
-        <div className="flex justify-center items-center min-h-screen">
-          <Loader2 className="w-8 h-8 animate-spin" />
-        </div>
-      }
+        fallback={<Loading/>}
     >
       <PokemonDetailsClient pokemon={pokemon} />
     </Suspense>
